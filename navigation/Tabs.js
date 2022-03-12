@@ -2,7 +2,7 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/Home";
 import TimeTable from "../screens/TimeTable";
-import { Dimensions } from "react-native";
+import { Dimensions, useColorScheme } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import Todos from "../screens/Todos";
 
@@ -11,13 +11,14 @@ const DEVICE_WIDTH = Dimensions.get("window").width;
 const Tab = createBottomTabNavigator();
 
 const Tabs = () => {
+  const isDark = useColorScheme() === "dark";
   return (
     <Tab.Navigator
       screenOptions={{
         tabBarStyle: {
           borderTopLeftRadius: 25,
           borderTopRightRadius: 25,
-          backgroundColor: "#E6E6E6",
+          backgroundColor: isDark ? "#1B1C25" : "#E6E6E6",
           position: "absolute",
           bottom: 0,
           width: DEVICE_WIDTH,

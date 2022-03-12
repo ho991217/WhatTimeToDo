@@ -4,6 +4,7 @@ export const ttable = [
     day: "월",
     subjects: [
       {
+        colorCode: 0,
         name: "자료구조",
         start: [9, 0],
         end: [10, 30],

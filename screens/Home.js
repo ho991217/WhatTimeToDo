@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { Animated, Text, View } from "react-native";
+import { Animated, Text, useColorScheme, View } from "react-native";
 import styled from "styled-components/native";
 import { colors } from "../colors";
 import Card from "../components/Card";
@@ -14,9 +14,19 @@ const Wrapper = styled.SafeAreaView`
   justify-content: flex-end;
 `;
 
+const TimeLeftText = styled.Text`
+  position: absolute;
+  z-index: 99;
+  top: 70px;
+  font-weight: 500;
+  font-size: 16px;
+  color: ${(props) => (props.isDark ? "white" : "black")};
+`;
+
 const Home = () => {
   const [timeLeft, setTimeLeft] = useState({});
   const [num, setNum] = useState(0);
+  const isDark = useColorScheme() === "dark";
 
   useEffect(() => {
     setTimeLeft(getTimeLeft(1, 9, 0));
@@ -25,7 +35,7 @@ const Home = () => {
 
   return (
     <Wrapper>
-      <Text style={{ position: "absolute", zIndex: 99, top: 60 }}>
+      <TimeLeftText isDark={isDark}>
         이 수업까지 남은 시간:{" "}
         {timeLeft.dayLeft > 3
           ? timeLeft.dayLeft + "일 "
@@ -34,7 +44,7 @@ const Home = () => {
           : timeLeft.hourLeft > 0
           ? timeLeft.hourLeft + "시간 " + timeLeft.minuteLeft + "분"
           : timeLeft.minuteLeft + "분"}
-      </Text>
+      </TimeLeftText>
 
       <Card title="자료구조" colors={colors[0]} />
     </Wrapper>
