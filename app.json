@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "WhatTimeToDo",
+    "slug": "WhatTimeToDo",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "WhatTimeToDo"
+}
