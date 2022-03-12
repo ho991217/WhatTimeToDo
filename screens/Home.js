@@ -1,12 +1,43 @@
-import { View, Text } from "react-native";
 import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useEffect } from "react";
+import { useState } from "react";
+import { Animated, Text, View } from "react-native";
+import styled from "styled-components/native";
+import { colors } from "../colors";
+import Card from "../components/Card";
+import { getTimeLeft } from "../functions/getTimeLeft";
+import { ttable } from "../table";
+
+const Wrapper = styled.SafeAreaView`
+  flex: 1;
+  align-items: center;
+  justify-content: flex-end;
+`;
 
 const Home = () => {
+  const [timeLeft, setTimeLeft] = useState({});
+  const [num, setNum] = useState(0);
+
+  useEffect(() => {
+    setTimeLeft(getTimeLeft(1, 9, 0));
+    setNum(parseInt(Math.random() * 6));
+  }, []);
+
   return (
-    <SafeAreaView>
-      <Text>Home</Text>
-    </SafeAreaView>
+    <Wrapper>
+      <Text style={{ position: "absolute", zIndex: 99, top: 60 }}>
+        이 수업까지 남은 시간:{" "}
+        {timeLeft.dayLeft > 3
+          ? timeLeft.dayLeft + "일 "
+          : timeLeft.dayLeft > 0
+          ? timeLeft.dayLeft + "일 " + timeLeft.hourLeft + "시간"
+          : timeLeft.hourLeft > 0
+          ? timeLeft.hourLeft + "시간 " + timeLeft.minuteLeft + "분"
+          : timeLeft.minuteLeft + "분"}
+      </Text>
+
+      <Card title="자료구조" colors={colors[0]} />
+    </Wrapper>
   );
 };
 

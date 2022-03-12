@@ -3,6 +3,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/Home";
 import TimeTable from "../screens/TimeTable";
 import { Dimensions } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
+import Todos from "../screens/Todos";
 
 const DEVICE_WIDTH = Dimensions.get("window").width;
 
@@ -13,9 +15,9 @@ const Tabs = () => {
     <Tab.Navigator
       screenOptions={{
         tabBarStyle: {
-          borderTopLeftRadius: 30,
-          borderTopRightRadius: 30,
-          //   backgroundColor: "#000000",
+          borderTopLeftRadius: 25,
+          borderTopRightRadius: 25,
+          backgroundColor: "#E6E6E6",
           position: "absolute",
           bottom: 0,
           width: DEVICE_WIDTH,
@@ -23,10 +25,52 @@ const Tabs = () => {
           zIndex: 8,
         },
         headerShown: false,
+        tabBarLabelStyle: {
+          fontSize: 12,
+          fontWeight: "600",
+        },
       }}
     >
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="TimeTable" component={TimeTable} />
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{
+          title: "홈",
+          tabBarIcon: ({ focused, color, size }) => {
+            return (
+              <MaterialIcons name="home-filled" size={size} color={color} />
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Todos"
+        component={Todos}
+        options={{
+          title: "투두",
+          tabBarIcon: ({ focused, color, size }) => {
+            return (
+              <MaterialIcons
+                name="format-list-bulleted"
+                size={size}
+                color={color}
+              />
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name="TimeTable"
+        component={TimeTable}
+        options={{
+          title: "시간표",
+          tabBarIcon: ({ focused, color, size }) => {
+            return (
+              <MaterialIcons name="table-chart" size={size} color={color} />
+            );
+          },
+        }}
+      />
     </Tab.Navigator>
   );
 };
