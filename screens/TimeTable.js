@@ -3,8 +3,8 @@ import React from "react";
 import styled from "styled-components/native";
 import TimeTableView, { genTimeBlock } from "react-native-timetable";
 import { useEffect } from "react";
-import AsyncStorage from "@react-native-community/async-storage";
 import { useState } from "react";
+import loadClasses from "../functions/loadClasses";
 
 const Wrapper = styled.SafeAreaView`
   flex: 1;
@@ -106,22 +106,8 @@ const TimeTable = () => {
     console.log(e);
   };
   const loadData = async () => {
-    await AsyncStorage.getItem("classes", (err, result) => {
-      if (err) {
-        alert(err.message);
-      } else {
-        const info = JSON.parse(result);
-        const refined = info.map((obj) => {
-          return {
-            endTime: new Date(obj.endTime),
-            startTime: new Date(obj.startTime),
-            title: obj.title,
-            todos: obj.todos,
-          };
-        });
-        setEvents_data(refined);
-      }
-    });
+    loadClasses().then((value) => setEvents_data(value));
+
     setLoading(false);
   };
   useEffect(() => {
