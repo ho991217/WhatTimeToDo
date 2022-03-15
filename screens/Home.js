@@ -46,7 +46,7 @@ const Home = () => {
           : timeLeft.minuteLeft + "분"}
       </TimeLeftText>
 
-      <Card title="자료구조" colors={colors[0]} />
+      <Card title="자료구조" colors={colors[6]} />
     </Wrapper>
   );
 };
