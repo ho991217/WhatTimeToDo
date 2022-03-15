@@ -111,14 +111,19 @@ const TimeTable = () => {
         alert(err.message);
       } else {
         const info = JSON.parse(result);
-        setEvents_data(info);
+        const refined = info.map((obj) => {
+          return {
+            endTime: new Date(obj.endTime),
+            startTime: new Date(obj.startTime),
+            title: obj.title,
+            todos: obj.todos,
+          };
+        });
+        setEvents_data(refined);
       }
     });
     setLoading(false);
   };
-  // const loadData = async () => {
-  //   await AsyncStorage.setItem("classes", JSON.stringify(events_data));
-  // };
   useEffect(() => {
     loadData();
   }, []);
